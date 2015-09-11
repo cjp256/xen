@@ -1,0 +1,26 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/kconfig-language.txt from the Linux
+# kernel source tree.
+#
+mainmenu "Xen $KERNELVERSION Configuration"
+
+config SRCARCH
+	string
+	option env="SRCARCH"
+
+config ARCH
+	string
+	option env="ARCH"
+
+source "arch/$SRCARCH/Kconfig"
+
+config KERNELVERSION
+	string
+	option env="KERNELVERSION"
+
+config DEFCONFIG_LIST
+	string
+	option defconfig_list
+	default "$ARCH_DEFCONFIG"
+	default "arch/$SRCARCH/defconfig"

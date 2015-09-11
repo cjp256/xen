@@ -218,6 +218,11 @@ tools/xentrace/tbctl
 tools/xentrace/xenctx
 tools/xentrace/xentrace
 xen/.banner
+xen/.config
+xen/.config.old
+xen/defconfig
+xen/**/*.cmd
+xen/**/modules.order
 xen/System.map
 xen/arch/arm/asm-offsets.s
 xen/arch/arm/xen.lds
@@ -240,6 +245,9 @@ xen/include/headers++.chk
 xen/include/asm
 xen/include/asm-*/asm-offsets.h
 xen/include/compat/*
+xen/include/config.h
+xen/include/config/
+xen/include/generated/
 xen/include/public/public
 xen/include/xen/*.new
 xen/include/xen/acm_policy.h

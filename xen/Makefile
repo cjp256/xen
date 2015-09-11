@@ -17,11 +17,17 @@ export XEN_ROOT := $(BASEDIR)/..
 
 EFI_MOUNTPOINT ?= $(BOOT_DIR)/efi
 
+# Don't break if the build process wasn't called from the top level
+XEN_TARGET_ARCH ?= $(shell uname -m)
+
 .PHONY: default
 default: build
 
 .PHONY: dist
 dist: install
+
+.PHONY: build
+build:: include/config/auto.conf
 
 .PHONY: build install uninstall clean distclean cscope TAGS tags MAP gtags
 build install uninstall debug clean distclean cscope TAGS tags MAP gtags::
@@ -216,3 +222,11 @@ FORCE:
 
 %/: FORCE
 	$(MAKE) -f $(BASEDIR)/Rules.mk -C $* built_in.o built_in_bin.o
+
+kconfig := oldsilentconfig oldconfig config menuconfig defconfig \
+	savedefconfig listnewconfig include/config/auto.conf
+.PHONY: $(kconfig)
+$(kconfig):
+	$(MAKE) -f Makefile.linux ARCH=$(XEN_TARGET_ARCH) $@
+
+-include include/config/auto.conf.cmd

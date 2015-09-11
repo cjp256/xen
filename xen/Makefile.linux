@@ -1,8 +1,7 @@
-VERSION = 4
-PATCHLEVEL = 2
+VERSION = $(XEN_VERSION)
+PATCHLEVEL = $(XEN_SUBVERSION)
 SUBLEVEL = 0
-EXTRAVERSION =
-NAME = Hurr durr I'ma sheep
+EXTRAVERSION = $(XEN_EXTRAVERSION)
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
@@ -144,7 +143,7 @@ $(filter-out _all sub-make $(CURDIR)/Makefile, $(MAKECMDGOALS)) _all: sub-make
 
 sub-make: FORCE
 	$(Q)$(MAKE) -C $(KBUILD_OUTPUT) KBUILD_SRC=$(CURDIR) \
-	-f $(CURDIR)/Makefile $(filter-out _all sub-make,$(MAKECMDGOALS))
+	-f $(CURDIR)/Makefile.linux $(filter-out _all sub-make,$(MAKECMDGOALS))
 
 # Leave processing to above invocation of make
 skip-makefile := 1
@@ -509,7 +508,7 @@ $(filter-out __build_one_by_one, $(MAKECMDGOALS)): __build_one_by_one
 __build_one_by_one:
 	$(Q)set -e; \
 	for i in $(MAKECMDGOALS); do \
-		$(MAKE) -f $(srctree)/Makefile $$i; \
+		$(MAKE) -f $(srctree)/Makefile.linux $$i; \
 	done
 
 else
@@ -521,7 +520,7 @@ ifeq ($(config-targets),1)
 # Read arch specific Makefile to set KBUILD_DEFCONFIG as needed.
 # KBUILD_DEFCONFIG may point out an alternative default configuration
 # used for 'make defconfig'
-include arch/$(SRCARCH)/Makefile
+include arch/$(SRCARCH)/Makefile.kconfig
 export KBUILD_DEFCONFIG KBUILD_KCONFIG
 
 config: scripts_basic outputmakefile FORCE
@@ -569,7 +568,7 @@ $(KCONFIG_CONFIG) include/config/auto.conf.cmd: ;
 # if auto.conf.cmd is missing then we are probably in a cleaned tree so
 # we execute the config step to be sure to catch updated Kconfig files
 include/config/%.conf: $(KCONFIG_CONFIG) include/config/auto.conf.cmd
-	$(Q)$(MAKE) -f $(srctree)/Makefile silentoldconfig
+	$(Q)$(MAKE) -f $(srctree)/Makefile.linux silentoldconfig
 else
 # external modules needs include/generated/autoconf.h and include/config/auto.conf
 # but do not care if they are up-to-date. Use auto.conf to trigger the test
@@ -602,7 +601,7 @@ all: vmlinux
 ARCH_CPPFLAGS :=
 ARCH_AFLAGS :=
 ARCH_CFLAGS :=
-include arch/$(SRCARCH)/Makefile
+include arch/$(SRCARCH)/Makefile.kconfig
 
 KBUILD_CFLAGS	+= $(call cc-option,-fno-delete-null-pointer-checks,)
 
@@ -921,7 +920,7 @@ quiet_cmd_link-vmlinux = LINK    $@
 # execute if the rest of the kernel build went well.
 vmlinux: scripts/link-vmlinux.sh $(vmlinux-deps) FORCE
 ifdef CONFIG_HEADERS_CHECK
-	$(Q)$(MAKE) -f $(srctree)/Makefile headers_check
+	$(Q)$(MAKE) -f $(srctree)/Makefile.linux headers_check
 endif
 ifdef CONFIG_SAMPLES
 	$(Q)$(MAKE) $(build)=samples
@@ -1015,7 +1014,7 @@ define filechk_version.h
 	echo '#define KERNEL_VERSION(a,b,c) (((a) << 16) + ((b) << 8) + (c))';)
 endef
 
-$(version_h): $(srctree)/Makefile FORCE
+$(version_h): $(srctree)/Makefile.linux FORCE
 	$(call filechk,version.h)
 	$(Q)rm -f $(old_version_h)
 

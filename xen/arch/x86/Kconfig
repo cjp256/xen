@@ -1,0 +1,28 @@
+# Select 32 or 64 bit
+config 64BIT
+	bool "64-bit Xen" if ARCH = "x86_64"
+	default ARCH != "i386"
+	---help---
+	  Say yes to build a 64-bit Xen
+	  Say no to build a 32-bit Xen
+
+config X86_32
+	def_bool y
+	depends on !64BIT
+
+config X86_64
+	def_bool y
+	depends on 64BIT
+
+config X86
+	def_bool y
+	select HAS_GDBSX
+
+config ARCH_DEFCONFIG
+	string
+	default "arch/x86/i386_defconfig" if X86_32
+	default "arch/x86/x86_64_defconfig" if X86_64
+
+source "common/Kconfig"
+
+source "drivers/Kconfig"

@@ -1,0 +1,26 @@
+
+KBUILD_DEFCONFIG := $(ARCH)_defconfig
+
+KBUILD_CFLAGS += -Iinclude/asm-x86/mach-default
+KBUILD_CFLAGS += -Iinclude/asm-x86/mach-generic
+
+core-y += arch/x86/
+
+drivers-$(CONFIG_OPROFILE) += arch/x86/oprofile/
+
+all: xen.gz
+
+xen.gz: vmlinux
+	$(Q)$(MAKE) $(build)=$(boot) $(KBUILD_IMAGE)
+
+PHONY += install
+install:
+	$(Q)$(MAKE) $(build)=$(boot) $@
+
+archclean:
+	$(Q)rm -rf $(objtree)/arch/x86
+	$(Q)$(MAKE) $(clean)=$(boot)
+
+define archhelp
+  echo '* xen.gz    - Compressed Xen image'
+endef
