@@ -11,6 +11,9 @@ gconf.glade.h
 *.pot
 *.mo
 
+.tmp_gtkcheck
+.tmp_qtcheck
+
 #
 # configuration programs
 #
