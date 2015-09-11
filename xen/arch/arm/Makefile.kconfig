@@ -1,0 +1,8 @@
+
+KBUILD_DEFCONFIG := $(ARCH)_defconfig
+
+KBUILD_CFLAGS += -Iinclude/asm-arm/$(ARCH)
+
+define archhelp
+  echo '* xen.gz    - Compressed Xen image'
+endef

@@ -1,0 +1,9 @@
+
+KBUILD_DEFCONFIG := $(ARCH)_defconfig
+
+KBUILD_CFLAGS += -Iinclude/asm-x86/mach-default
+KBUILD_CFLAGS += -Iinclude/asm-x86/mach-generic
+
+define archhelp
+  echo '* xen.gz    - Compressed Xen image'
+endef
