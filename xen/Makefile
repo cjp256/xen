@@ -17,11 +17,17 @@ export XEN_ROOT := $(BASEDIR)/..
 
 EFI_MOUNTPOINT ?= $(BOOT_DIR)/efi
 
+# Don't break if the build process wasn't called from the top level
+XEN_TARGET_ARCH ?= $(shell uname -m)
+
 .PHONY: default
 default: build
 
 .PHONY: dist
 dist: install
+
+.PHONY: build
+build:: $(BASEDIR)/include/config/auto.conf
 
 .PHONY: build install uninstall clean distclean cscope TAGS tags MAP gtags
 build install uninstall debug clean distclean cscope TAGS tags MAP gtags::
@@ -88,6 +94,7 @@ _clean: delete-unfresh-files
 	$(MAKE) -f $(BASEDIR)/Rules.mk -C xsm clean
 	$(MAKE) -f $(BASEDIR)/Rules.mk -C crypto clean
 	$(MAKE) -f $(BASEDIR)/Rules.mk -C arch/$(TARGET_ARCH) clean
+	$(MAKE) -f scripts/kconfig/Makefile clean
 	rm -f include/asm *.o $(TARGET) $(TARGET).gz $(TARGET).efi $(TARGET)-syms *~ core
 	rm -f include/asm-*/asm-offsets.h
 	rm -f .banner
@@ -216,3 +223,18 @@ FORCE:
 
 %/: FORCE
 	$(MAKE) -f $(BASEDIR)/Rules.mk -C $* built_in.o built_in_bin.o
+
+kconfig := silentoldconfig oldconfig config menuconfig defconfig \
+	nconfig xconfig gconfig savedefconfig listnewconfig olddefconfig
+.PHONY: $(kconfig)
+$(kconfig):
+	$(MAKE) -f $(BASEDIR)/scripts/kconfig/Makefile ARCH=$(XEN_TARGET_ARCH) $@
+
+$(BASEDIR)/include/config/%.conf: $(BASEDIR)/include/config/auto.conf.cmd
+	$(Q)$(MAKE) -f $(BASEDIR)/scripts/kconfig/Makefile ARCH=$(XEN_TARGET_ARCH) silentoldconfig
+
+# Allow people to just run `make` as before and not force them to configure
+$(BASEDIR)/.config $(BASEDIR)/include/config/auto.conf.cmd: ;
+	$(Q)$(MAKE) -f $(BASEDIR)/scripts/kconfig/Makefile ARCH=$(XEN_TARGET_ARCH) defconfig
+
+-include $(BASEDIR)/include/config/auto.conf.cmd
