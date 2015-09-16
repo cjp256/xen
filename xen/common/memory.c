@@ -610,7 +610,7 @@ static int xenmem_add_to_physmap(struct domain *d,
     xatp->gpfn += start;
     xatp->size -= start;
 
-#ifdef HAS_PASSTHROUGH
+#ifdef CONFIG_HAS_PASSTHROUGH
     if ( need_iommu(d) )
         this_cpu(iommu_dont_flush_iotlb) = 1;
 #endif
@@ -633,7 +633,7 @@ static int xenmem_add_to_physmap(struct domain *d,
         }
     }
 
-#ifdef HAS_PASSTHROUGH
+#ifdef CONFIG_HAS_PASSTHROUGH
     if ( need_iommu(d) )
     {
         this_cpu(iommu_dont_flush_iotlb) = 0;
@@ -760,7 +760,7 @@ static int construct_memop_from_reservation(
     return 0;
 }
 
-#ifdef HAS_PASSTHROUGH
+#ifdef CONFIG_HAS_PASSTHROUGH
 struct get_reserved_device_memory {
     struct xen_reserved_device_memory_map map;
     unsigned int used_entries;
@@ -1204,7 +1204,7 @@ long do_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
         break;
     }
 
-#ifdef HAS_PASSTHROUGH
+#ifdef CONFIG_HAS_PASSTHROUGH
     case XENMEM_reserved_device_memory_map:
     {
         struct get_reserved_device_memory grdm;
