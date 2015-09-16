@@ -12,6 +12,8 @@
 #endif
 #include <asm/config.h>
 
+#include <generated/autoconf.h>
+
 #define EXPORT_SYMBOL(var)
 #define EXPORT_SYMBOL_GPL(var)
 
