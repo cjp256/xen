@@ -36,3 +36,10 @@ config UART_OMAP
 	help
 	  This selects the Texas Instruments OMAP UART. If you have a Texas
 	  Instruments based CPU, say Y.
+
+config UART_SCIF
+	bool "SuperH SCI(F) UART support"
+	depends on ARM_32
+	help
+	  This selects the SuperH SCI(F) UART. If you have a SuperH based board,
+	  say Y.
