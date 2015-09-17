@@ -19,6 +19,7 @@ config ARM
 	select HAS_DEVICE_TREE
 	select HAS_VIDEO
 	select HAS_PASSTHROUGH
+	select HAS_PDX
 
 config ARCH_DEFCONFIG
 	string
