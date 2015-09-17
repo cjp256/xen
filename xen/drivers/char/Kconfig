@@ -27,3 +27,7 @@ config HAS_OMAP
 # Select HAS_SCIF if a SCIF UART is supported
 config HAS_SCIF
 	bool
+
+# Select HAS_EHCI if EHCI debug is supported
+config HAS_EHCI
+	bool

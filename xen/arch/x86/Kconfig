@@ -10,6 +10,7 @@ config X86
 	select HAS_VGA
 	select HAS_CPUFREQ
 	select HAS_PCI
+	select HAS_EHCI
 	select HAS_NS16550
 	select HAS_GDBSX
 	select HAS_PDX
