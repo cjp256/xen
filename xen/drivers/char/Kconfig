@@ -8,3 +8,10 @@ config UART_NS16550
 config HAS_IOPORTS
 	bool
 	depends on UART_NS16550
+
+config UART_CADENCE
+	bool "Xilinx Zynq Cadence UART support"
+	depends on ARM_64
+	help
+	  This selects the Xilinx Zynq Cadence UART. If you have a Xilinx Zynq
+	  based board, say Y.
