@@ -9,6 +9,10 @@ config HAS_DEVICE_TREE
 config HAS_PDX
 	bool
 
+# Select HAS_KEXEC if kexec is supported
+config HAS_KEXEC
+	bool
+
 # Select HAS_GDBSX if GDBSX is supported
 config HAS_GDBSX
 	bool
