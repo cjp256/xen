@@ -109,7 +109,7 @@ void iommu_read_msi_from_ire(struct msi_desc *msi_desc, struct msi_msg *msg);
 #define PT_IRQ_TIME_OUT MILLISECS(8)
 #endif /* HAS_PCI */
 
-#ifdef HAS_DEVICE_TREE
+#ifdef CONFIG_HAS_DEVICE_TREE
 #include <xen/device_tree.h>
 
 int iommu_assign_dt_device(struct domain *d, struct dt_device_node *dev);
@@ -120,7 +120,7 @@ int iommu_release_dt_devices(struct domain *d);
 int iommu_do_dt_domctl(struct xen_domctl *, struct domain *,
                        XEN_GUEST_HANDLE_PARAM(xen_domctl_t));
 
-#endif /* HAS_DEVICE_TREE */
+#endif /* CONFIG_HAS_DEVICE_TREE */
 
 struct page_info;
 
