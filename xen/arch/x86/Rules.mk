@@ -1,7 +1,6 @@
 ########################################
 # x86-specific definitions
 
-HAS_EHCI := y
 xenoprof := y
 
 CFLAGS += -I$(BASEDIR)/include 
