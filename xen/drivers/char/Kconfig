@@ -29,3 +29,10 @@ config UART_EXYNOS4210
 	help
 	  This selects the Samsung Exynos 4210 UART. If you have a Samsung
 	  Exynos based board, say Y.
+
+config UART_OMAP
+	bool "OMAP UART support"
+	depends on ARM_32
+	help
+	  This selects the Texas Instruments OMAP UART. If you have a Texas
+	  Instruments based CPU, say Y.
