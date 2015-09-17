@@ -16,6 +16,7 @@ config X86
 	select HAS_PDX
 	select HAS_KEXEC
 	select HAS_MEM_ACCESS
+	select HAS_MEM_PAGING
 
 config ARCH_DEFCONFIG
 	string
