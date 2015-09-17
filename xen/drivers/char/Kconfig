@@ -1,0 +1,5 @@
+
+config UART_NS16550
+	bool "16550-series UART support"
+	help
+	  This selects the 16550-series UART support. For most systems, say Y.
