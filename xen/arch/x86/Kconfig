@@ -12,6 +12,7 @@ config X86
 	select HAS_PCI
 	select UART_NS16550
 	select HAS_GDBSX
+	select HAS_PDX
 
 config ARCH_DEFCONFIG
 	string
