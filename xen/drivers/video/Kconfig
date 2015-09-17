@@ -6,3 +6,7 @@ config HAS_VIDEO
 # Select HAS_VGA if VGA is supported
 config HAS_VGA
        bool
+
+# Select HAS_ARM_HDLCD if ARM HDLCD is supported
+config HAS_ARM_HDLCD
+	bool
