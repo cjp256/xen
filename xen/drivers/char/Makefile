@@ -5,6 +5,6 @@ obj-$(CONFIG_UART_PL011) += pl011.o
 obj-$(CONFIG_UART_EXYNOS4210) += exynos4210-uart.o
 obj-$(CONFIG_UART_OMAP) += omap-uart.o
 obj-$(CONFIG_UART_SCIF) += scif-uart.o
-obj-$(HAS_EHCI) += ehci-dbgp.o
+obj-$(CONFIG_UART_EHCI) += ehci-dbgp.o
 obj-$(CONFIG_ARM) += dt-uart.o
 obj-y += serial.o
