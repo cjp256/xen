@@ -21,6 +21,7 @@ config ARM
 	select HAS_ARM_HDLCD
 	select HAS_PASSTHROUGH
 	select HAS_PDX
+	select HAS_MEM_ACCESS
 
 config ARCH_DEFCONFIG
 	string
