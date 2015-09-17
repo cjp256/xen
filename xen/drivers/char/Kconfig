@@ -1,0 +1,4 @@
+
+# Select HAS_NS16550 if a 16550 UART is supported
+config HAS_NS16550
+	bool
