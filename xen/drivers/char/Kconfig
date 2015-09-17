@@ -11,3 +11,7 @@ config HAS_IOPORTS
 # Select HAS_CADENCE_UART if a Cadence UART is supported
 config HAS_CADENCE_UART
 	bool
+
+# Select HAS_PL011 if a PL011 is supported
+config HAS_PL011
+	bool
