@@ -13,6 +13,7 @@ config X86
 	select HAS_NS16550
 	select HAS_GDBSX
 	select HAS_PDX
+	select HAS_KEXEC
 
 config ARCH_DEFCONFIG
 	string
