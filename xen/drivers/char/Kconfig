@@ -43,3 +43,10 @@ config UART_SCIF
 	help
 	  This selects the SuperH SCI(F) UART. If you have a SuperH based board,
 	  say Y.
+
+config UART_EHCI
+	bool "USB EHCI debug port support"
+	depends on X86
+	help
+	  This selects the USB based EHCI debug port to be used as a UART. If
+	  you have an x86 based system with USB, say Y.
