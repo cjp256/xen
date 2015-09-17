@@ -1291,7 +1291,7 @@ int prepare_ring_for_helper(
         return -ENOENT;
     }
 #endif
-#ifdef HAS_MEM_SHARING
+#ifdef CONFIG_HAS_MEM_SHARING
     if ( p2m_is_shared(p2mt) )
     {
         if ( page )
