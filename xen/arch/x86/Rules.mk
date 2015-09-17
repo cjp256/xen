@@ -3,7 +3,6 @@
 
 HAS_EHCI := y
 HAS_KEXEC := y
-HAS_PDX := y
 xenoprof := y
 
 CFLAGS += -I$(BASEDIR)/include 
