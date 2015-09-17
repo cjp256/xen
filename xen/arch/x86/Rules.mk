@@ -2,7 +2,6 @@
 # x86-specific definitions
 
 HAS_EHCI := y
-HAS_KEXEC := y
 xenoprof := y
 
 CFLAGS += -I$(BASEDIR)/include 

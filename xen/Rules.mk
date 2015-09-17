@@ -68,7 +68,7 @@ ifneq ($(max_phys_irqs),)
 CFLAGS-y                += -DMAX_PHYS_IRQS=$(max_phys_irqs)
 endif
 
-CONFIG_KEXEC-$(HAS_KEXEC) := $(kexec)
+CONFIG_KEXEC-$(CONFIG_HAS_KEXEC) := $(kexec)
 CONFIG_KEXEC              := $(CONFIG_KEXEC-y)
 
 CFLAGS-$(CONFIG_KEXEC)  += -DCONFIG_KEXEC
