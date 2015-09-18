@@ -28,6 +28,10 @@ config ARCH_DEFCONFIG
 	default "arch/arm/arm32_defconfig" if ARM_32
 	default "arch/arm/arm64_defconfig" if ARM_64
 
+# Select HAS_GICV3 if Generic Interrupt Connect (GICv3) is supported
+config HAS_GICV3
+	bool
+
 source "common/Kconfig"
 
 source "drivers/Kconfig"
