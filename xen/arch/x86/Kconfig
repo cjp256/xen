@@ -19,6 +19,7 @@ config X86
 	select HAS_IOPORTS
 	select HAS_ACPI
 	select HAS_PASSTHROUGH
+	select HAS_VIDEO
 	select HAS_PCI
 	select HAS_NS16550
 	select HAS_GDBSX
