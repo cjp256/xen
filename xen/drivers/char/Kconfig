@@ -2,3 +2,8 @@
 # Select HAS_NS16550 if a 16550 UART is supported
 config HAS_NS16550
 	bool
+
+# Select HAS_IOPORTS if 16550 has I/O ports
+config HAS_IOPORTS
+	bool
+	depends on HAS_NS16550
