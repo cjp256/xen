@@ -1,7 +1,6 @@
 ########################################
 # x86-specific definitions
 
-HAS_VGA  := y
 HAS_CPUFREQ := y
 HAS_EHCI := y
 HAS_KEXEC := y
