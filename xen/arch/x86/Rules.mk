@@ -1,7 +1,6 @@
 ########################################
 # x86-specific definitions
 
-HAS_ACPI := y
 HAS_VGA  := y
 HAS_VIDEO  := y
 HAS_CPUFREQ := y
