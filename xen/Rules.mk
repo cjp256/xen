@@ -10,7 +10,6 @@ lock_profile  ?= n
 crash_debug   ?= n
 frame_pointer ?= n
 lto           ?= n
-kexec         ?= y
 
 include $(BASEDIR)/include/config/auto.conf
 
@@ -64,11 +63,6 @@ endif
 ifneq ($(max_phys_irqs),)
 CFLAGS-y                += -DMAX_PHYS_IRQS=$(max_phys_irqs)
 endif
-
-CONFIG_KEXEC-$(CONFIG_HAS_KEXEC) := $(kexec)
-CONFIG_KEXEC              := $(CONFIG_KEXEC-y)
-
-CFLAGS-$(CONFIG_KEXEC)  += -DCONFIG_KEXEC
 
 AFLAGS-y                += -D__ASSEMBLY__ -include $(BASEDIR)/include/xen/config.h
 
