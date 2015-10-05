@@ -37,6 +37,14 @@ config ARCH_DEFCONFIG
 	default "arch/x86/i386_defconfig" if X86_32
 	default "arch/x86/x86_64_defconfig" if X86_64
 
+config COMPAT
+	bool
+	default y if 64BIT
+	help
+	  Support 32-bit PV guests on 64-bit Xen
+
+	  If unsure, say Y.
+
 source "common/Kconfig"
 
 source "drivers/Kconfig"
