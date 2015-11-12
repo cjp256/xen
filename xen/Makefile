@@ -26,6 +26,9 @@ default: build
 .PHONY: dist
 dist: install
 
+.PHONY: build
+build:: $(BASEDIR)/include/config/auto.conf
+
 .PHONY: build install uninstall clean distclean cscope TAGS tags MAP gtags
 build install uninstall debug clean distclean cscope TAGS tags MAP gtags::
 ifneq ($(XEN_TARGET_ARCH),x86_32)
@@ -227,9 +230,14 @@ kconfig := silentoldconfig oldconfig config menuconfig defconfig \
 $(kconfig):
 	$(MAKE) -f $(BASEDIR)/scripts/kconfig/Makefile ARCH=$(XEN_TARGET_ARCH) $@
 
-$(BASEDIR)/include/config/%.conf: $(BASEDIR)/include/config/auto.conf.cmd
+$(BASEDIR)/include/config/%.conf: $(BASEDIR)/include/config/auto.conf.cmd $(BASEDIR)/.config
 	$(Q)$(MAKE) -f $(BASEDIR)/scripts/kconfig/Makefile ARCH=$(XEN_TARGET_ARCH) silentoldconfig
 
 # Allow people to just run `make` as before and not force them to configure
-$(BASEDIR)/.config $(BASEDIR)/include/config/auto.conf.cmd: ;
+$(BASEDIR)/.config:
 	$(Q)$(MAKE) -f $(BASEDIR)/scripts/kconfig/Makefile ARCH=$(XEN_TARGET_ARCH) defconfig
+
+# Break the dependency chain for the first run
+$(BASEDIR)/include/config/auto.conf.cmd: ;
+
+-include $(BASEDIR)/include/config/auto.conf.cmd
