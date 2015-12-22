@@ -429,6 +429,7 @@ AS_IF([test "x$systemd" = "xy"], [
     hotplug/Linux/systemd/xen-init-dom0.service
     hotplug/Linux/systemd/xen-qemu-dom0-disk-backend.service
     hotplug/Linux/systemd/xen-watchdog.service
+    hotplug/Linux/systemd/xen-xl-devd.service
     hotplug/Linux/systemd/xenconsoled.service
     hotplug/Linux/systemd/xendomains.service
     hotplug/Linux/systemd/xenstored.service

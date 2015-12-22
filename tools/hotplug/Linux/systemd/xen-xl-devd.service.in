@@ -1,0 +1,17 @@
+[Unit]
+Description=Script to start services needed in a Xen driver domain (xl devd)
+Requires=proc-xen.mount
+After=proc-xen.mount remote-fs.target
+ConditionPathExists=/proc/xen/capabilities
+
+[Service]
+Type=forking
+Environment=XLDEVD_ARGS=
+EnvironmentFile=-/etc/default/xendriverdomain
+PIDFile=@XEN_RUN_DIR@/xldevd.pid
+ExecStartPre=/bin/grep -q control_d /proc/xen/capabilities
+ExecStartPre=/bin/mkdir -p @XEN_RUN_DIR@
+ExecStart=@sbindir@/xl devd --pidfile=@XEN_RUN_DIR@/xldevd.pid $XLDEVD_ARGS
+
+[Install]
+WantedBy=multi-user.target
