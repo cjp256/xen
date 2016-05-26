@@ -147,7 +147,7 @@ static int load_plugins(void)
 
 	bzero(dp, sizeof (struct dirent) + name_max + 1);
 
-	while (readdir_r(dir, dp, &dpp) == 0 && dpp != NULL) {
+	while ((dpp = readdir(dir)) != NULL) {
 		if (strcmp(dpp->d_name, ".") == 0)
 			continue;
 		if (strcmp(dpp->d_name, "..") == 0)
