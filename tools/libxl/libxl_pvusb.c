@@ -508,19 +508,10 @@ int libxl_devid_to_device_usbctrl(libxl_ctx *ctx,
     return rc;
 }
 
-static void *zalloc_dirent(libxl__gc *gc, const char *dirpath)
-{
-    size_t need = offsetof(struct dirent, d_name) +
-                  pathconf(dirpath, _PC_NAME_MAX) + 1;
-
-    return libxl__zalloc(gc, need);
-}
-
 static char *usbdev_busaddr_to_busid(libxl__gc *gc, int bus, int addr)
 {
     DIR *dir;
     char *busid = NULL;
-    struct dirent *de_buf;
     struct dirent *de;
 
     /* invalid hostbus or hostaddr */
@@ -533,21 +524,17 @@ static char *usbdev_busaddr_to_busid(libxl__gc *gc, int bus, int addr)
         return NULL;
     }
 
-    de_buf = zalloc_dirent(gc, SYSFS_USB_DEV);
-
     for (;;) {
         char *filename;
         void *buf;
         int busnum = -1;
         int devnum = -1;
 
-        int r = readdir_r(dir, de_buf, &de);
-        if (r) {
+        de = readdir(dir);
+        if (!de) {
             LOGE(ERROR, "failed to readdir %s", SYSFS_USB_DEV);
             break;
         }
-        if (!de)
-            break;
 
         if (!strcmp(de->d_name, ".") ||
             !strcmp(de->d_name, ".."))
@@ -1157,7 +1144,6 @@ static int usbdev_get_all_interfaces(libxl__gc *gc, const char *busid,
 {
     DIR *dir;
     char *buf;
-    struct dirent *de_buf;
     struct dirent *de;
     int rc;
 
@@ -1172,18 +1158,14 @@ static int usbdev_get_all_interfaces(libxl__gc *gc, const char *busid,
         return ERROR_FAIL;
     }
 
-    de_buf = zalloc_dirent(gc, SYSFS_USB_DEV);
-
     for (;;) {
-        int r = readdir_r(dir, de_buf, &de);
+        de = readdir(dir);
 
-        if (r) {
+        if (!de) {
             LOGE(ERROR, "failed to readdir %s", SYSFS_USB_DEV);
             rc = ERROR_FAIL;
             goto out;
         }
-        if (!de)
-            break;
 
         if (!strcmp(de->d_name, ".") ||
             !strcmp(de->d_name, ".."))
