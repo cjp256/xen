@@ -21,6 +21,7 @@
 #include <xen/vmap.h>
 #include <xen/8250-uart.h>
 #include <asm/io.h>
+#include <asm/platform.h>
 
 #define REG_SHIFT 2
 

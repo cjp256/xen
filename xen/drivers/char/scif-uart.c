@@ -28,6 +28,7 @@
 #include <asm/device.h>
 #include <asm/scif-uart.h>
 #include <asm/io.h>
+#include <asm/platform.h>
 
 #define PARITY_NONE    0
 #define PARITY_EVEN    1

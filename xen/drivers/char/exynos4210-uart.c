@@ -26,6 +26,7 @@
 #include <asm/device.h>
 #include <asm/exynos4210-uart.h>
 #include <asm/io.h>
+#include <asm/platform.h>
 
 static struct exynos4210_uart {
     unsigned int baud, clock_hz, data_bits, parity, stop_bits;

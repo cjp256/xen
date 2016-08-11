@@ -25,6 +25,7 @@
 #include <asm/io.h>
 #ifdef CONFIG_HAS_DEVICE_TREE
 #include <asm/device.h>
+#include <asm/platform.h>
 #endif
 #ifdef CONFIG_X86
 #include <asm/fixmap.h>

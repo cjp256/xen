@@ -28,6 +28,7 @@
 #include <xen/vmap.h>
 #include <asm/cadence-uart.h>
 #include <asm/io.h>
+#include <asm/platform.h>
 
 static struct cuart {
     unsigned int irq;

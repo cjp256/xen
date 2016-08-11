@@ -28,6 +28,7 @@
 #include <xen/vmap.h>
 #include <asm/pl011-uart.h>
 #include <asm/io.h>
+#include <asm/platform.h>
 
 static struct pl011 {
     unsigned int data_bits, parity, stop_bits;
