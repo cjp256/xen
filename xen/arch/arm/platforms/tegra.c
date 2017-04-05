@@ -108,8 +108,6 @@ static void tegra_reset(void)
  */
 static void tegra_ictlr_set_interrupt_enable(unsigned int irq, bool enabled)
 {
-    uint32_t previous_iep_class;
-
     /* If we're enabling a given bit, use the SET register; otherwise CLR. */
     unsigned int register_number =
         enabled ? TEGRA_ICTLR_CPU_IER_SET : TEGRA_ICTLR_CPU_IER_CLR;
@@ -134,10 +132,6 @@ static void tegra_ictlr_set_interrupt_enable(unsigned int irq, bool enabled)
 
     /* Enable the given IRQ. */
     writel(mask, target_ictlr + register_number);
-
-    /* Mark the interrupt as a normal interrupt-- not a fast IRQ. */
-    previous_iep_class = readl(target_ictlr + TEGRA_ICTLR_CPU_IEP_CLASS);
-    writel(previous_iep_class & ~mask, target_ictlr + TEGRA_ICTLR_CPU_IEP_CLASS);
 }
 
 
@@ -201,7 +195,6 @@ static void tegra_route_irq_to_xen(struct irq_desc *desc, unsigned int priority)
      * gating of the interrupt.
      */
     tegra_ictlr_set_interrupt_enable(irq, true);
-
 }
 
 /*
