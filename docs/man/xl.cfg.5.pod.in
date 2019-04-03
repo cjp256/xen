@@ -2297,8 +2297,7 @@ Simple DirectMedia Layer). The default is (0) not enabled.
 
 =item B<opengl=BOOLEAN>
 
-Enable OpenGL acceleration of the SDL display. Only effects machines
-using B<device_model_version="qemu-xen-traditional"> and only if the
+Enable OpenGL acceleration of the SDL display.  Only works if the
 device-model was compiled with OpenGL support. Default is (0) false.
 
 =item B<nographic=BOOLEAN>
