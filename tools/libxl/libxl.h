@@ -747,6 +747,16 @@ typedef struct libxl__ctx libxl_ctx;
 #define LIBXL_HAVE_QXL 1
 
 /*
+ * LIBXL_HAVE_VIRTIO_VGA
+ *
+ * If defined, then the libxl_vga_interface_type will contain another value:
+ * "VIRTIO". This value define if virtio vga is supported.
+ *
+ * If this is not defined, the virtio vga support is missed.
+ */
+#define LIBXL_HAVE_VIRTIO_VGA 1
+
+/*
  * LIBXL_HAVE_SPICE_VDAGENT
  *
  * If defined, then the libxl_spice_info structure will contain a boolean type:

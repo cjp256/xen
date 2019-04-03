@@ -220,6 +220,7 @@ libxl_vga_interface_type = Enumeration("vga_interface_type", [
     (2, "STD"),
     (3, "NONE"),
     (4, "QXL"),
+    (5, "VIRTIO"),
     ], init_val = "LIBXL_VGA_INTERFACE_TYPE_UNKNOWN")
 
 libxl_vendor_device = Enumeration("vendor_device", [

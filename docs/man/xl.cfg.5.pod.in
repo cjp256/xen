@@ -2232,6 +2232,8 @@ device-model, the default and minimum is 8 MB.
 For QXL vga, both the default and minimal are 128MB.
 If B<videoram> is set less than 128MB, an error will be triggered.
 
+For VirtIO vga, the default is 256MB.
+
 =item B<stdvga=BOOLEAN>
 
 Speficies a standard VGA card with VBE (VESA BIOS Extensions) as the
@@ -2245,7 +2247,7 @@ B<This option is deprecated, use vga="stdvga" instead>.
 =item B<vga="STRING">
 
 Selects the emulated video card.
-Options are: B<none>, B<stdvga>, B<cirrus> and B<qxl>.
+Options are: B<none>, B<stdvga>, B<cirrus>, B<qxl>, and B<virtio>.
 The default is B<cirrus>.
 
 In general, QXL should work with the Spice remote display protocol
